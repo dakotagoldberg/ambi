@@ -1,4 +1,4 @@
-import { ADD_HABIT, TOGGLE_ADD_HABIT, REMOVE_HABIT } from '../actions'
+import { ADD_HABIT, TOGGLE_ADD_HABIT, REMOVE_HABIT, TOGGLE_HABIT_COMPLETED } from '../actions'
 
 export const initialState = {
     allHabits: [
@@ -51,6 +51,10 @@ export default function habits(state = initialState, action) {
         case REMOVE_HABIT:
             return {...state, allHabits: state.allHabits.map(habit => 
                 action.habit.id === habit.id ? {...habit, currentHabit: false} : habit
+            )}
+        case TOGGLE_HABIT_COMPLETED:
+            return {...state, allHabits: state.allHabits.map(habit => 
+                action.habit.id === habit.id ? {...habit, completedToday: !habit.completedToday} : habit
             )}
         default:
             return state

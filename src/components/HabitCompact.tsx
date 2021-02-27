@@ -4,14 +4,14 @@ import React from 'react'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
 import { FontAwesome5, Octicons } from '@expo/vector-icons'; 
 import { connect } from 'react-redux'
-import { toggleHabbitCompleted } from '../actions'
+import { toggleAddHabit } from '../actions'
 import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
 const {height, width} = Dimensions.get('window');
 
-function Habit(props) {
+function HabitCompact(props) {
     const item = props.habit
 
     const [loaded] = useFonts(fonts);
@@ -30,43 +30,12 @@ function Habit(props) {
                 </LinearGradient>
                 <View style={styles.habitTextContainer}>
                     <Text style={styles.habitName}>{item.name}</Text>
-                    <Text style={styles.habitDescription}>With your left hand</Text>
-                    <View style={styles.habitInfoContainer}>
-                        <View style={styles.habitLabelContainer}>
-                            <Text style={styles.habitLabelContainerText}>Habit</Text>
-                        </View>
-                        <View style={styles.habitStreakContainer}>
-                            <Text style={styles.habitStreakText}>{item.streak}</Text>
-                            <View style={{height: 17, width: 20}}>
-                                <MaskedView
-                                    style={styles.habitStreakIcon}
-                                    maskElement={
-                                    <View
-                                        style={{
-                                        backgroundColor: 'transparent',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        }}>
-                                        <FontAwesome5 name="fire" size={15} color="white" />
-                                    </View>
-                                    }>
-                                    <LinearGradient
-                                    colors={['#FDBC0C', '#FD800C']}
-                                    start={[0,0]}
-                                    end={[0,1]}
-                                    style={{flex:1}}
-                                    />
-                                </MaskedView>
-                            </View>
-                        </View>
-                    </View>
                 </View>
             </View>
             <TouchableOpacity 
-                style={[styles.habitCheckboxContainer, item.completedToday ? styles.habitCheckboxChecked : styles.habitCheckboxUnchecked]}
-                onPress={() => {props.toggleHabbitCompleted(item); Haptics.impactAsync()}}
+                style={[styles.habitCheckboxContainer, styles.habitCheckboxChecked]}
+                onPress={() => {props.toggleAddHabit(item); Haptics.impactAsync()}}
                 >
-                {item.completedToday && (
                     <LinearGradient
                         colors={item.colors}
                         start={[0,0]}
@@ -74,12 +43,11 @@ function Habit(props) {
                         style={styles.habitCheckboxCheckedFill}
                     >
                         <Octicons 
-                            name="check" 
+                            name={item.currentHabit ? "dash" : "plus"} 
                             size={18}
                             color="white" 
                         />
                     </LinearGradient>
-                )}
             </TouchableOpacity>
         </View>
     )
@@ -91,11 +59,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: width * .85,
-        height: 110,
+        height: 75,
         borderRadius: 15,
         margin: width * .025,
         backgroundColor: '#FFFCF5',
-        paddingHorizontal: 25,
+        paddingHorizontal: 15,
         paddingTop: 20,
         paddingBottom: 18,
     },
@@ -166,10 +134,6 @@ const styles = StyleSheet.create({
         width: 32,
         borderRadius: 10,
     },
-    habitCheckboxUnchecked: {
-        borderColor: '#F4F1E9',
-        borderWidth: 3,
-    },
     habitCheckboxChecked: {
         shadowOffset: {width: 0, height: 5},
         shadowColor: "#8E3D02",
@@ -193,5 +157,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    { toggleHabbitCompleted }
-)(Habit)
+    { toggleAddHabit }
+)(HabitCompact)

@@ -48,7 +48,7 @@ function HomeScreen(props) {
             </View>
             <FlatList
                 style={{marginTop: 50,}}
-                data={props.habits}
+                data={props.habits.filter(habit => habit.currentHabit)}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => (
                     <Habit habit={item}/>
