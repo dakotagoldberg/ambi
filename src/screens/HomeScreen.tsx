@@ -4,10 +4,15 @@ import { connect } from 'react-redux'
 import { FontAwesome5, MaterialIcons, AntDesign } from '@expo/vector-icons'; 
 import MaskedView from '@react-native-community/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
+import Habit from '../components/Habit';
+import { useFonts } from 'expo-font';
+import { fonts } from '../constants/font';
 const {height, width} = Dimensions.get('window');
 
 function HomeScreen(props) {
 
+    const [loaded] = useFonts(fonts);
+    if (!loaded) { return null; }
     
     return (
         <View style={styles.container}>
@@ -15,16 +20,18 @@ function HomeScreen(props) {
                 <Text style={styles.titleText}>Today</Text>
                 <Text style={styles.wordCountText}>X activities, {props.habits.length} habits</Text>
                 <View style={styles.achievementsPanel}>
-                    <LinearGradient
-                        colors={['#FDBC0C', '#FD800C']}
-                        start={[0,0]}
-                        end={[0,1]}
-                        style={styles.achievementsPanelIconContainer}
-                        >
-                            <FontAwesome5 name="medal" size={24} color="white" />
-                    </LinearGradient>
-                    <Text style={styles.achievementsPanelText}>Achievements</Text>
-                    <MaterialIcons name="arrow-forward-ios" size={26} color="#635C4E" />
+                    <View style={styles.achievementsPanelLeft}>
+                        <LinearGradient
+                            colors={['#FDBC0C', '#FD800C']}
+                            start={[0,0]}
+                            end={[0,1]}
+                            style={styles.achievementsPanelIconContainer}
+                            >
+                                <FontAwesome5 name="medal" size={24} color="white" />
+                        </LinearGradient>
+                        <Text style={styles.achievementsPanelText}>Achievements</Text>
+                    </View>
+                        <MaterialIcons name="arrow-forward-ios" size={26} color="#635C4E" />
                 </View>
                 <TouchableOpacity onPress={() => props.navigation.navigate('EditHabits')}>
                 <LinearGradient
@@ -44,50 +51,7 @@ function HomeScreen(props) {
                 data={props.habits}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => (
-                    <View style={styles.listItemContainer}>
-                        <LinearGradient
-                        colors={['#FDBC0C', '#FD800C']}
-                        start={[0,0]}
-                        end={[0,1]}
-                        style={styles.habitIconContainer}
-                        >
-                            <FontAwesome5 name={item.icon.slug} size={24} color="white" />
-                        </LinearGradient>
-                        <View style={styles.habitTextContainer}>
-                            <Text style={styles.habitName}>{item.name}</Text>
-                            <Text style={styles.habitDescription}>With your left hand</Text>
-                            <View style={styles.habitInfoContainer}>
-                                <View style={styles.habitLabelContainer}>
-                                    <Text style={styles.habitLabelContainerText}></Text>
-                                </View>
-                                <View style={styles.habitStreakContainer}>
-                                    <Text style={styles.habitLabelContainerText}></Text>
-                                    <MaskedView
-                                        style={{ flex: 1, flexDirection: 'row', height: 24 }}
-                                        maskElement={
-                                        <View
-                                            style={{
-                                            backgroundColor: 'transparent',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            }}>
-                                            <FontAwesome5 name="fire" size={24} color="white" />
-                                        </View>
-                                        }>
-                                        <LinearGradient
-                                        colors={['#FDBC0C', '#FD800C']}
-                                        start={[0,0]}
-                                        end={[0,1]}
-                                        style={{flex:1}}
-                                        />
-                                    </MaskedView>
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.habitCheckboxContainer}>
-
-                        </View>
-                    </View>
+                    <Habit habit={item}/>
                 )}
             />
             <View>
@@ -118,13 +82,14 @@ const styles = StyleSheet.create({
     titleText: {
         fontSize: 30,
         color: '#3A3833',
-        fontWeight: 'bold',
+        fontFamily: 'DMSans_Bold'
     },
     wordCountText: {
         margin: 5,
         fontSize: 20,
         color: '#635C4E',
         fontWeight: '500',
+        fontFamily: 'DMSans_Medium'
     },
     achievementsPanel: {
         marginTop: 10,
@@ -137,6 +102,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 17.5,
         paddingVertical: 10,
         borderRadius: 15,
+    },
+    achievementsPanelLeft: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     achievementsPanelIconContainer: {
         alignItems: 'center',
@@ -153,7 +122,8 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#635C4E',
         fontWeight: '500',
-        marginLeft: -width * .03,
+        fontFamily: 'DMSans_Medium',
+        marginLeft: 15,
     },
     editHabitsButton: {
         position: 'absolute',
@@ -174,27 +144,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: 'white',
         fontWeight: 'bold',
-    },
-    listItemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        width: width * .85,
-        height: width * .25,
-        borderRadius: 15,
-        margin: width * .025,
-        backgroundColor: '#FFFCF5',
-    },
-    habitIconContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        height: 44,
-        width: 44,
-        shadowOffset: {width: 0, height: 5},
-        shadowColor: "#8E3D02",
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
+        fontFamily: 'DMSans_Bold'
     },
 })
 const mapStateToProps = state => {
