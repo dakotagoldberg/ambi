@@ -28,7 +28,7 @@ function EditHabitsScreen(props) {
             </View>   
             <SectionList
                 // style={{marginTop: 25,}}
-                sections={[{title: 'My habits', data: props.habits.filter(habit => habit.currentHabit)}, {title: 'Habit Library', data: props.habits.filter(habit => !habit.currentHabit)}]}
+                sections={[{title: 'My Habits', data: props.habits.filter(habit => habit.currentHabit)}, {title: 'Habit Library', data: props.habits.filter(habit => !habit.currentHabit)}]}
                 keyExtractor={(item, index) => item + index}
                 renderItem={({ item }) => <HabitCompact habit={item}/>}
                 renderSectionHeader={({ section: { title } }) => (

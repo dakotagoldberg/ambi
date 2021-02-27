@@ -9,6 +9,7 @@ import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
+import moment from 'moment';
 const {height, width} = Dimensions.get('window');
 
 function Habit(props) {
@@ -16,6 +17,15 @@ function Habit(props) {
 
     const [loaded] = useFonts(fonts);
     if (!loaded) { return null; }
+
+    const checkHabitCompleted = () => {
+        let completed = false
+        item.datesCompleted.forEach(day => {
+            if ((moment(day).isSame(new Date().toISOString(), 'd')))
+                completed = true
+        })
+        return completed
+    }
 
     return(
         <View style={styles.listItemContainer}>
@@ -63,10 +73,10 @@ function Habit(props) {
                 </View>
             </View>
             <TouchableOpacity 
-                style={[styles.habitCheckboxContainer, item.completedToday ? styles.habitCheckboxChecked : styles.habitCheckboxUnchecked]}
+                style={[styles.habitCheckboxContainer, checkHabitCompleted() ? styles.habitCheckboxChecked : styles.habitCheckboxUnchecked]}
                 onPress={() => {props.toggleHabbitCompleted(item); Haptics.impactAsync()}}
                 >
-                {item.completedToday && (
+                {checkHabitCompleted() && (
                     <LinearGradient
                         colors={item.colors}
                         start={[0,0]}

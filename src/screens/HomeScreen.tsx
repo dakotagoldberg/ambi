@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { Dimensions, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import { connect } from 'react-redux'
-import { FontAwesome5, MaterialIcons, AntDesign } from '@expo/vector-icons'; 
+import { FontAwesome5, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import MaskedView from '@react-native-community/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import Habit from '../components/Habit';
@@ -27,9 +27,9 @@ function HomeScreen(props) {
                             end={[0,1]}
                             style={styles.achievementsPanelIconContainer}
                             >
-                                <FontAwesome5 name="medal" size={24} color="white" />
+                                <MaterialCommunityIcons name="rocket-launch" size={24} color="white" />
                         </LinearGradient>
-                        <Text style={styles.achievementsPanelText}>Achievements</Text>
+                        <Text style={styles.achievementsPanelText}>My Progress</Text>
                     </View>
                         <MaterialIcons name="arrow-forward-ios" size={26} color="#635C4E" />
                 </View>

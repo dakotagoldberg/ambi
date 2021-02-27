@@ -1,4 +1,5 @@
-import { ADD_HABIT, TOGGLE_ADD_HABIT, REMOVE_HABIT, TOGGLE_HABIT_COMPLETED } from '../actions'
+import moment from 'moment'
+import { ADD_HABIT, TOGGLE_ADD_HABIT, REMOVE_HABIT, SET_HABIT_COMPLETED_TRUE, SET_HABIT_COMPLETED_FALSE, TOGGLE_HABIT_COMPLETED } from '../actions'
 
 export const initialState = {
     allHabits: [
@@ -9,9 +10,9 @@ export const initialState = {
             colors: ['#FDBC0C', '#FD800C'],
             streak: 17,
             longestStreak: 17,
-            datesCompleted: [],
+            datesCompleted: ['2021-02-27T21:03:48.556Z'],
             currentHabit: true,
-            completedToday: true,
+            completedToday: false,
         },
         {
             name: 'Use Utensils',
@@ -52,10 +53,41 @@ export default function habits(state = initialState, action) {
             return {...state, allHabits: state.allHabits.map(habit => 
                 action.habit.id === habit.id ? {...habit, currentHabit: false} : habit
             )}
-        case TOGGLE_HABIT_COMPLETED:
+        case SET_HABIT_COMPLETED_FALSE:
+            console.log(state.allHabits.forEach(habit => {
+                if (action.habit.id === habit.id) {
+                    habit.datesCompleted.forEach(date => console.log((moment(date).isSame(new Date().toISOString(), 'd'))))
+                }
+            }))
             return {...state, allHabits: state.allHabits.map(habit => 
-                action.habit.id === habit.id ? {...habit, completedToday: !habit.completedToday} : habit
+                action.habit.id === habit.id ? {...habit, datesCompleted: habit.datesCompleted.filter(date => (moment(date).isSame(new Date().toISOString(), 'd')))} : habit
             )}
+        case SET_HABIT_COMPLETED_TRUE:
+            return {...state, allHabits: state.allHabits.map(habit => 
+                action.habit.id === habit.id ? {...habit, datesCompleted: [new Date().toISOString(), ...habit.datesCompleted]} : habit
+            )}
+        case TOGGLE_HABIT_COMPLETED:
+            let completed = false
+            state.allHabits.forEach(habit => {
+                if (action.habit.id === habit.id) {
+                    habit.datesCompleted.forEach(day => {
+                        if ((moment(day).isSame(new Date().toISOString(), 'd')))
+                            completed = true
+                    })
+                }
+            })
+            if (completed) {
+                return {...state, allHabits: state.allHabits.map(habit => 
+                    action.habit.id === habit.id ? {...habit, datesCompleted: habit.datesCompleted.filter(date => !(moment(date).isSame(new Date().toISOString(), 'd')))} : habit
+                )}
+            }
+            else {
+                return {...state, allHabits: state.allHabits.map(habit => 
+                    action.habit.id === habit.id ? {...habit, datesCompleted: [new Date().toISOString(), ...habit.datesCompleted]} : habit
+                )}
+            }
+            
+            
         default:
             return state
 
