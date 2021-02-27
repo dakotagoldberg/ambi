@@ -10,6 +10,7 @@ import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
 import moment from 'moment';
+import { checkHabitCompleted, calculateStreak } from '../constants/functions';
 const {height, width} = Dimensions.get('window');
 
 function Habit(props) {
@@ -18,14 +19,7 @@ function Habit(props) {
     const [loaded] = useFonts(fonts);
     if (!loaded) { return null; }
 
-    const checkHabitCompleted = () => {
-        let completed = false
-        item.datesCompleted.forEach(day => {
-            if ((moment(day).isSame(new Date().toISOString(), 'd')))
-                completed = true
-        })
-        return completed
-    }
+    
 
     return(
         <View style={styles.listItemContainer}>
@@ -46,7 +40,7 @@ function Habit(props) {
                             <Text style={styles.habitLabelContainerText}>Habit</Text>
                         </View>
                         <View style={styles.habitStreakContainer}>
-                            <Text style={styles.habitStreakText}>{item.streak}</Text>
+                            <Text style={styles.habitStreakText}>{calculateStreak(item)}</Text>
                             <View style={{height: 17, width: 20}}>
                                 <MaskedView
                                     style={styles.habitStreakIcon}
@@ -73,10 +67,10 @@ function Habit(props) {
                 </View>
             </View>
             <TouchableOpacity 
-                style={[styles.habitCheckboxContainer, checkHabitCompleted() ? styles.habitCheckboxChecked : styles.habitCheckboxUnchecked]}
+                style={[styles.habitCheckboxContainer, checkHabitCompleted(item) ? styles.habitCheckboxChecked : styles.habitCheckboxUnchecked]}
                 onPress={() => {props.toggleHabbitCompleted(item); Haptics.impactAsync()}}
                 >
-                {checkHabitCompleted() && (
+                {checkHabitCompleted(item) && (
                     <LinearGradient
                         colors={item.colors}
                         start={[0,0]}

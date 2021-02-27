@@ -10,7 +10,7 @@ export const initialState = {
             colors: ['#FDBC0C', '#FD800C'],
             streak: 17,
             longestStreak: 17,
-            datesCompleted: ['2021-02-27T21:03:48.556Z'],
+            datesCompleted: ['2021-02-27T21:03:48.556Z', '2021-02-26T21:03:48.556Z', '2021-02-25T21:03:48.556Z', '2021-02-24T21:03:48.556Z', '2021-02-20T21:03:48.556Z', '2021-02-19T21:03:48.556Z'],
             currentHabit: true,
             completedToday: false,
         },
