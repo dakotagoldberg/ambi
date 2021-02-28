@@ -47,7 +47,7 @@ function HomeScreen(props) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                style={{marginTop: 50,}}
+                style={{marginTop: 40,}}
                 data={props.habits.filter(habit => habit.currentHabit)}
                 keyExtractor={(item) => item.id}
                 renderItem={({item}) => (
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     },
     editHabitsButton: {
         position: 'absolute',
-        marginTop: 20,
+        marginTop: 15,
         alignSelf: 'center',
         width: 200,
         height: 55,
