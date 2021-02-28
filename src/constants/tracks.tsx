@@ -10,7 +10,7 @@ export const handwritingTrack = {
             track: 'handwriting',
             activityDescriptionShort: `Welcome to Ambi! Let's start with some simple handwriting practice.`,
             activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`,
-            activityDifficulty: 'easy',
+            activityDifficulty: 'Easy',
         },
         {
             activityName: 'Alphabet #1',
@@ -18,7 +18,7 @@ export const handwritingTrack = {
             track: 'handwriting',
             activityDescriptionShort: `Practice your penmanship by writing the alphabet.`,
             activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`,
-            activityDifficulty: 'easy',
+            activityDifficulty: 'Easy',
         }
     ]
 }
@@ -35,7 +35,7 @@ export const tapGamesTrack = {
             track: 'tap',
             activityDescriptionShort: `Welcome to Ambi! Let's play some tap games!`,
             activityDescriptionLong: `Welcome to Ambi! Let's play some tap games! These will be on your device on this app.`,
-            activityDifficulty: 'easy',
+            activityDifficulty: 'Easy',
         }
     ]
 }
@@ -52,7 +52,7 @@ export const sportsTrack = {
             track: 'sports',
             activityDescriptionShort: `This is the first sports exercise.`,
             activityDescriptionLong: `This is the first sports exercise. You will be doing something to warm up.`,
-            activityDifficulty: 'easy',
+            activityDifficulty: 'Easy',
         }
     ]
 }
