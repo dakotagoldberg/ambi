@@ -12,34 +12,35 @@ const {height, width} = Dimensions.get('window');
 
 function TutorialScreen(props) {
 
+    // const [loaded] = useFonts(fonts);
+    // if (!loaded) { return null; }
 
+    const [dotSel, setDots] = useState([['#FDBC0C', '#FD800C'], ['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4']]);
+    const [page, setPage] = useState(0);
+    const [topWidth, setWidth] = useState(width);
+    const [nonDomHand,setHand] = useState('');
 
-const [dotSel, setDots] = useState([['#FDBC0C', '#FD800C'], ['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4']]);
-const [page, setPage] = useState(0);
-const [topWidth, setWidth] = useState(width);
-const [nonDomHand,setHand] = useState('');
-
-const finalButton = (hand) =>{
-    setHand(hand)
-    console.log(hand)
-    
-}
-const switchDot = (pageNum) => {
-  
-    let temp = dotSel
-    temp = [['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4']]
-    
-    temp[Math.round(pageNum)] = ['#FDBC0C', '#FD800C']
-    setDots(temp)
-    
-    if(pageNum >2.5){
-        setWidth(0)
+    const finalButton = (hand) =>{
+        setHand(hand)
+        console.log(hand)
+        
     }
-    else{
-        setWidth(width)
-    }
+    const switchDot = (pageNum) => {
     
-}
+        let temp = dotSel
+        temp = [['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4'], ['#C4C4C4', '#C4C4C4']]
+        
+        temp[Math.round(pageNum)] = ['#FDBC0C', '#FD800C']
+        setDots(temp)
+        
+        if(pageNum >2.5){
+            setWidth(0)
+        }
+        else{
+            setWidth(width)
+        }
+        
+    }
 
 
     return (
@@ -155,7 +156,7 @@ const switchDot = (pageNum) => {
                                     textAlign:'center',
                                 }}>Select your dominant hand</Text>
                                 <View style = {{flexDirection:'row', justifyContent:'space-between'}}>
-                                <TouchableOpacity  onPress = {}>
+                                <TouchableOpacity>
                                     <LinearGradient 
                                     colors={['#FDBC0C', '#FD800C']}
                                     start={[0,0]}
@@ -165,7 +166,7 @@ const switchDot = (pageNum) => {
                                     </LinearGradient>
                                     </TouchableOpacity>
 
-                                <TouchableOpacity onPress = {}>
+                                <TouchableOpacity>
                                 <LinearGradient 
                                     colors={['#FDBC0C', '#FD800C']}
                                     start={[0,0]}
@@ -240,6 +241,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFFCF5',
         alignItems: 'center',
+        justifyContent: 'center'
     },
     
     page: {
@@ -271,12 +273,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#C4C4C4'
     },
     titleText: {
-            paddingTop:60,
+            // paddingTop:60,
             
         
-            height:100,
+            // height:100,
             
-            fontSize: 38,
+            // fontSize: 38,
             color: '#3A3833',
             fontFamily: 'DMSans_Bold',
             fontWeight:'bold',
@@ -287,7 +289,7 @@ const styles = StyleSheet.create({
         paddingLeft:22,
         fontSize: 20,
         color: '#948B79',
-        fontFamily: 'DMSans',
+        fontFamily: 'DMSans_Regular',
         fontWeight:'normal',
         
     },

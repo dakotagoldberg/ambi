@@ -34,7 +34,7 @@ function Habit(props) {
                 </LinearGradient>
                 <View style={styles.habitTextContainer}>
                     <Text style={styles.habitName}>{item.name}</Text>
-                    <Text style={styles.habitDescription}>With your left hand</Text>
+                    <Text style={styles.habitDescription}>With your {props.hand} hand</Text>
                     <View style={styles.habitInfoContainer}>
                         <View style={styles.habitLabelContainer}>
                             <Text style={styles.habitLabelContainerText}>Habit</Text>
@@ -196,6 +196,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         habits: state.habits.allHabits,
+        hand: state.settings.handToStrengthen,
     }
 }
 

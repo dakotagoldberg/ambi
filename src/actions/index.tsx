@@ -12,6 +12,9 @@ export const TOGGLE_TRACK_SUBSCRIPTION = 'TOGGLE_TRACK_SUBSCRIPTION'
 export const TOGGLE_ACTIVITY_COMPLETED = 'TOGGLE_ACTIVITY_COMPLETED'
 export const SET_ACTIVITY_IMAGE = 'SET_ACTIVITY_IMAGE'
 
+export const SET_HAND_TO_STRENGTHEN = 'SET_HAND_TO_STRENGTHEN'
+export const SET_TUTORIAL_COMPLETED = 'SET_TUTORIAL_COMPLETED'
+export const SET_TUTORIAL_UNCOMPLETED = 'SET_TUTORIAL_UNCOMPLETED'
 
 // Action Creators
 
@@ -44,4 +47,18 @@ export function toggleActivityCompleted(activity: string) {
 
 export function setActivityImage(activity: string, image) {
     return { type: SET_ACTIVITY_IMAGE, activity, image, date: new Date().toISOString() }
+}
+
+
+// Settings
+export function setHandToStrengthen(hand) {
+    return { type: SET_HAND_TO_STRENGTHEN, hand }
+}
+
+export function setTutorialCompleted() {
+    return { type: SET_TUTORIAL_COMPLETED }
+}
+
+export function setTutorialUncompleted() {
+    return { type: SET_TUTORIAL_UNCOMPLETED }
 }

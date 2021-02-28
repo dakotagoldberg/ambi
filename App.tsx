@@ -7,6 +7,7 @@ import { store, persistor } from './src/store';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './src/navigation/TabNavigator';
 import moment from 'moment';
+import AppNavigator from './src/navigation/AppNavigator';
 
 export default function App() {
 
@@ -15,7 +16,7 @@ export default function App() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer>
-            <TabNavigator/>
+            <AppNavigator/>
             <StatusBar style="auto" />
           </NavigationContainer>
       </PersistGate>
