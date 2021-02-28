@@ -104,6 +104,18 @@ function ActivityScreen(props) {
                 {/* <Text style={styles.actualDes}>Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your right hand and then again with your left. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!</Text> */}
                 <Text style={styles.descriptionTitle}>Description</Text>
                 <Text style={styles.descriptionText}>{activity.activityDescriptionLong}</Text>
+                {activity.gameName && (
+                    <LinearGradient
+                    colors={colors}
+                    start={[0,0]}
+                    end={[0,1]}
+                    style={styles.gradientButton}
+                    >
+                    <TouchableOpacity onPress={() => {props.navigation.navigate(activity.gameName)}}>
+                        <Text style={styles.gradientButtonText}>Launch Game</Text>
+                    </TouchableOpacity>
+            </LinearGradient>
+                )}
                 {activity.lessonText && <Text style={styles.lessonText}>{activity.lessonText && activity.lessonText}</Text>}
                 <TouchableOpacity style={styles.uploadImageButton} onPress={pickImage}>
                     <Text style={styles.uploadImageButtonText}>{(props.myActivities.filter(i => i.id == activity.activityId)[0] && props.myActivities.filter(i => i.id == activity.activityId)[0].image) ? 'Re-upload Image' : 'Upload Image'}</Text>

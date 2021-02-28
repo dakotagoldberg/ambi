@@ -65,8 +65,9 @@ export const tapGamesTrack = {
             trackName: 'Tap Games',
             activityDescriptionUltraShort: 'Learn about tap games',
             activityDescriptionShort: `Welcome to Ambi! Let's play some tap games!`,
-            activityDescriptionLong: `Welcome to Ambi! Let's play some tap games! These will be on your device on this app.`,
+            activityDescriptionLong: `Welcome to Ambi! Let's play some tap games! These will be on your device on this app. For this first game, simply drag the car between the checkpoints with your non-dominant hand. Can you get to 200 points?`,
             activityDifficulty: 'Easy',
+            gameName: 'Game1',
         }
     ]
 }
