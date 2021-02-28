@@ -17,9 +17,9 @@ function TracksScreen(props) {
         <View style={styles.container}>
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
                 <Text style={styles.titleText}>Activity Tracks</Text>
-                    <Text style={styles.subtitleText}>Improve a wide range of skills</Text>
+                    <Text style={styles.subtitleText}>Build strength and control</Text>
 
-                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview')}>
+                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview', {name: 'handwriting'})}>
                 <LinearGradient
                         colors={['#FDBC0C', '#FD800C']}
                         start={[0,0]}
@@ -44,12 +44,12 @@ function TracksScreen(props) {
                         end={[0,1]}
                         style={styles.gradientButton}
                         >
-                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview')}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview', {name: 'handwriting'})}>
                             <Text style={styles.gradientButtonText}>View Track</Text>
                             </TouchableOpacity>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview')}>
+                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview', {name: 'tap'})}>
                 <LinearGradient
                         colors={['#FF7F77', '#FC3DD2']}
                         start={[0,0]}
@@ -72,12 +72,12 @@ function TracksScreen(props) {
                         end={[0,1]}
                         style={styles.gradientButton}
                         >
-                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview')}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview', {name: 'tap'})}>
                             <Text style={styles.gradientButtonText}>View Track</Text>
                             </TouchableOpacity>
                     </LinearGradient>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview')}>
+                <TouchableOpacity style={styles.trackPanel} onPress={() => props.navigation.navigate('TrackOverview', {name: 'sports'})}>
                 <LinearGradient
                         colors={['#09C4FF', '#096BFF']}
                         start={[0,0]}
@@ -100,7 +100,7 @@ function TracksScreen(props) {
                         end={[0,1]}
                         style={[styles.gradientButton]}
                         >
-                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview')}>
+                            <TouchableOpacity onPress={() => props.navigation.navigate('TrackOverview', {name: 'sports'})}>
                             <Text style={styles.gradientButtonText}>View Track</Text>
                             </TouchableOpacity>
                     </LinearGradient>

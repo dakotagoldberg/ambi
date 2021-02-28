@@ -53,19 +53,19 @@ export default function habits(state = initialState, action) {
             return {...state, allHabits: state.allHabits.map(habit => 
                 action.habit.id === habit.id ? {...habit, currentHabit: false} : habit
             )}
-        case SET_HABIT_COMPLETED_FALSE:
-            console.log(state.allHabits.forEach(habit => {
-                if (action.habit.id === habit.id) {
-                    habit.datesCompleted.forEach(date => console.log((moment(date).isSame(new Date().toISOString(), 'd'))))
-                }
-            }))
-            return {...state, allHabits: state.allHabits.map(habit => 
-                action.habit.id === habit.id ? {...habit, datesCompleted: habit.datesCompleted.filter(date => (moment(date).isSame(new Date().toISOString(), 'd')))} : habit
-            )}
-        case SET_HABIT_COMPLETED_TRUE:
-            return {...state, allHabits: state.allHabits.map(habit => 
-                action.habit.id === habit.id ? {...habit, datesCompleted: [new Date().toISOString(), ...habit.datesCompleted]} : habit
-            )}
+        // case SET_HABIT_COMPLETED_FALSE:
+        //     console.log(state.allHabits.forEach(habit => {
+        //         if (action.habit.id === habit.id) {
+        //             habit.datesCompleted.forEach(date => console.log((moment(date).isSame(new Date().toISOString(), 'd'))))
+        //         }
+        //     }))
+        //     return {...state, allHabits: state.allHabits.map(habit => 
+        //         action.habit.id === habit.id ? {...habit, datesCompleted: habit.datesCompleted.filter(date => (moment(date).isSame(new Date().toISOString(), 'd')))} : habit
+        //     )}
+        // case SET_HABIT_COMPLETED_TRUE:
+        //     return {...state, allHabits: state.allHabits.map(habit => 
+        //         action.habit.id === habit.id ? {...habit, datesCompleted: [new Date().toISOString(), ...habit.datesCompleted]} : habit
+        //     )}
         case TOGGLE_HABIT_COMPLETED:
             let completed = false
             state.allHabits.forEach(habit => {

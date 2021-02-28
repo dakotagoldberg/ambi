@@ -20,7 +20,7 @@ function EditHabitsScreen(props) {
             <View style={styles.headerRow}>
                 <TouchableOpacity 
                     style={styles.backButton}
-                    onPress={() => props.navigation.navigate('Home')}
+                    onPress={() => props.navigation.goBack()}
                 >
                     <MaterialIcons name="arrow-back-ios" size={30} color="#3A3833" />
                 </TouchableOpacity>

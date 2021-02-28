@@ -17,7 +17,15 @@ function TrackOverviewScreen(props) {
     
     return (
         <View style={styles.container}>
-            <Text style={styles.titleText}>Track Overview</Text>
+            <View style={styles.headerRow}>
+                <TouchableOpacity 
+                    style={styles.backButton}
+                    onPress={() => props.navigation.goBack()}
+                >
+                    <MaterialIcons name="arrow-back-ios" size={30} color="#3A3833" />
+                </TouchableOpacity>
+                <Text style={styles.titleText}>{props.route.params.name}</Text>
+            </View>   
         </View>
     )
 }
@@ -27,7 +35,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFEFCE',
         alignItems: 'center',
-        justifyContent: 'center', // Remove this
     },
     headerRow: {
         flexDirection: 'row',

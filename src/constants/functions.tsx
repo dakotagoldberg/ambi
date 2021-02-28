@@ -23,7 +23,6 @@ export const calculateStreak = (habit) => {
         if (moment(habit.datesCompleted[1]).diff(moment(new Date().toISOString()), 'd') == -1) {
             for (let i = 0; i < habit.datesCompleted.length - 1; i++) {
                 if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') == 1) {
-                    console.log ('heyyy')
                     streak += 1
                 }
                 else {
@@ -38,7 +37,6 @@ export const calculateStreak = (habit) => {
         if (moment(habit.datesCompleted[0]).diff(moment(new Date().toISOString()), 'd') == -1) {
             for (let i = 0; i < habit.datesCompleted.length - 1; i++) {
                 if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') == 1) {
-                    console.log ('heyyy')
                     streak += 1
                 }
                 else {
