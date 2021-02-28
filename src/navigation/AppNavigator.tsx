@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux'
 import HomeScreen from '../navigation/TabNavigator'
-import IntroScreen from '../screens/TutorialScreen'
+import TestScreen from '../screens/TestScreen'
 
 
 
@@ -14,7 +14,7 @@ function HabitStack() {
         <Stack.Navigator
             headerMode='none'
         >
-            {/* <Stack.Screen name="Intro" component={IntroScreen} /> */}
+            {/* <Stack.Screen name="Test" component={TestScreen} /> */}
             <Stack.Screen name="Home" component={HomeScreen} />
 
 

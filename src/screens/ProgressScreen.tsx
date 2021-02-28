@@ -41,7 +41,7 @@ function ProgressScreen(props) {
                 rawProgress.push({
                     type: 'activity',
                     id: activity.id,
-                    name: tracks.filter(t => t.id == activity.id.split('_')[0])[0].activities.filter(a => a.activityId == activity.id)[0].activityName,
+                    name: activity.id,
                     icon: tracks.filter(t => t.id == activity.id.split('_')[0])[0].icon,
                     date: activity.dateCompleted,
                     image: activity.image,

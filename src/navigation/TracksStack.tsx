@@ -6,6 +6,7 @@ import TracksScreen from '../screens/TracksScreen'
 import TrackOverview from '../screens/TrackOverviewScreen'
 import ActivityScreen from '../screens/ActivityScreen'
 import HomeScreen from '../screens/HomeScreen';
+import Game1 from '../screens/TestScreen'
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ function TracksStack() {
             <Stack.Screen name="Tracks" component={TracksScreen} />
             <Stack.Screen name="TrackOverview" component={TrackOverview} />
             <Stack.Screen name="Activity" component={ActivityScreen} />
+            <Stack.Screen name="Game1" component={Game1} />
 
         </Stack.Navigator>
     )

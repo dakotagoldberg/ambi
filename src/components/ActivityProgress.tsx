@@ -36,7 +36,7 @@ function ActivityProgress(props) {
                         <FontAwesome5 name={item.icon.slug} size={24} color="white" />
                     </LinearGradient> */}
                     <View style={styles.habitTextContainer}>
-                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitName}>{activity.name}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitName}>{activity.activity.activityName}</Text>
                         <View style={styles.habitInfoContainer}>
                             
                         </View>

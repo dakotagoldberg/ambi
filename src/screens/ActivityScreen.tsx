@@ -104,6 +104,7 @@ function ActivityScreen(props) {
                 {/* <Text style={styles.actualDes}>Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your right hand and then again with your left. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!</Text> */}
                 <Text style={styles.descriptionTitle}>Description</Text>
                 <Text style={styles.descriptionText}>{activity.activityDescriptionLong}</Text>
+                {activity.lessonText && <Text style={styles.lessonText}>{activity.lessonText && activity.lessonText}</Text>}
                 <TouchableOpacity style={styles.uploadImageButton} onPress={pickImage}>
                     <Text style={styles.uploadImageButtonText}>{(props.myActivities.filter(i => i.id == activity.activityId)[0] && props.myActivities.filter(i => i.id == activity.activityId)[0].image) ? 'Re-upload Image' : 'Upload Image'}</Text>
                 </TouchableOpacity>
@@ -216,6 +217,19 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         alignSelf: 'flex-start',
         marginHorizontal: 40,
+    },
+    lessonText: {
+        marginTop: 10,
+        fontSize: 16,
+        borderRadius: 15,
+        marginVertical: 10,
+        color: '#948B79',
+        fontFamily: 'DMSans_Medium',
+        textAlign: 'left',
+        alignSelf: 'flex-start',
+        marginHorizontal: 40,
+        padding: 20,
+        backgroundColor: '#F4F1E9',
     },
     uploadImageButton: {
         marginTop: 15,
