@@ -19,7 +19,7 @@ function HabitCompact(props) {
 
     return(
         <View style={{alignItems: 'center'}}>
-            <View style={styles.listItemContainer}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('Activity', {activity: props.activity, colors: props.colors})} style={styles.listItemContainer}>
                 <View style={styles.topContainer}>
                     <Text numberOfLines={3} ellipsizeMode='tail' style={styles.titleText}>{props.activity.activityName}</Text>
                     <LinearGradient
@@ -35,18 +35,23 @@ function HabitCompact(props) {
                             />
                         </LinearGradient>
                     </View>
-                    <Text numberOfLines={3} ellipsizeMode='tail' style={styles.descriptionText}>{props.activity.activityDescriptionShort}</Text>
-                    <TouchableOpacity style={styles.gradientButtonContainer} onPress={() => props.navigation.navigate('TrackOverview', {name: 'sports'})}>
-                        <LinearGradient
-                            colors={props.colors}
-                            start={[0,0]}
-                            end={[0,1]}
-                            style={[styles.gradientButton]}
-                            >
-                                <Text style={styles.gradientButtonText}>Let's Go</Text>
-                        </LinearGradient>
+                    <Text numberOfLines={5} ellipsizeMode='tail' style={styles.descriptionText}>{props.activity.activityDescriptionShort}</Text>
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity style={styles.gradientButtonContainer} onPress={() => props.navigation.navigate('Activity', {activity: props.activity, colors: props.colors})}>
+                            <LinearGradient
+                                colors={props.colors}
+                                start={[0,0]}
+                                end={[0,1]}
+                                style={[styles.gradientButton]}
+                                >
+                                    <Text style={styles.gradientButtonText}>Let's Go</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                        <View style={styles.difficultyContainer}>
+                            <Text style={styles.difficultyText}>{props.activity.activityDifficulty}</Text>
+                        </View>
+                    </View>
                     </TouchableOpacity>
-                </View>
                 <View style={styles.line}></View>
             </View>
     )
@@ -97,11 +102,19 @@ const styles = StyleSheet.create({
         color: '#948B79',
         fontFamily: 'DMSans_Regular',
     },
+    buttonRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginTop: 15,
+        width: width * .85,
+        paddingHorizontal: 30,
+
+    },
     gradientButtonContainer: {
         alignSelf: 'flex-start',
-        width: width * .85,
-        marginTop: 15,
-        paddingHorizontal: 30,
+        // width: width * .85,
+        // paddingHorizontal: 30,
         // alignItems: 'flex-start',
         // justifyContent: 'flex-start',
     },
@@ -122,6 +135,18 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         fontFamily: 'DMSans_Bold'
+    },
+    difficultyContainer: {
+        backgroundColor: '#F4F1E9',
+        borderRadius: 20,
+        paddingHorizontal: 15,
+        paddingVertical: 5,
+    },
+    difficultyText: {
+        fontSize: 13,
+        color: '#C7BFB0',
+        fontWeight: 'bold',
+        fontFamily: 'DMSans_Medium'
     },
     line: {
         height: width * .07,

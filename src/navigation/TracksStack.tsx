@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { connect } from 'react-redux'
 import TracksScreen from '../screens/TracksScreen'
 import TrackOverview from '../screens/TrackOverviewScreen'
+import ActivityScreen from '../screens/ActivityScreen'
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,8 @@ function TracksStack() {
         >
             <Stack.Screen name="Tracks" component={TracksScreen} />
             <Stack.Screen name="TrackOverview" component={TrackOverview} />
+            <Stack.Screen name="Activity" component={ActivityScreen} />
+
         </Stack.Navigator>
     )
 }

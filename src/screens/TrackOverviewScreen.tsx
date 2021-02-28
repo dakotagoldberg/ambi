@@ -55,7 +55,7 @@ function TrackOverviewScreen(props) {
                 data={track.activities}
                 keyExtractor={(item: any) => item.activityId}
                 renderItem={({item}) => (
-                    <Activity colors={track.colors} activity={item}/>
+                    <Activity navigation={props.navigation} colors={track.colors} activity={item}/>
                 )}
                 ListFooterComponent={() => (
                     <View style={styles.listItemContainer}><Text style={styles.listEndText}>More Coming Soon!</Text></View>
@@ -100,10 +100,11 @@ const styles = StyleSheet.create({
         fontFamily: 'DMSans_Bold'
     },
     descriptionText: {
-        marginTop: 2,
+        marginTop: 3,
         fontSize: 18,
         color: '#635C4E',
-        fontFamily: 'DMSans_Regular'
+        fontFamily: 'DMSans_Regular',
+        textAlign: 'center',
     },
 
     subscribeButton: {

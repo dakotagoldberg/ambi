@@ -9,14 +9,16 @@ export const handwritingTrack = {
             activityId: 'handwriting_getting_started',
             track: 'handwriting',
             activityDescriptionShort: `Welcome to Ambi! Let's start with some simple handwriting practice.`,
-            activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`
+            activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`,
+            activityDifficulty: 'easy',
         },
         {
             activityName: 'Alphabet #1',
             activityId: 'handwriting_alphabet_#1',
             track: 'handwriting',
             activityDescriptionShort: `Practice your penmanship by writing the alphabet.`,
-            activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`
+            activityDescriptionLong: `Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your ${"dominant"} hand and then again with your ${"non-dominant"}. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!`,
+            activityDifficulty: 'easy',
         }
     ]
 }
@@ -32,7 +34,8 @@ export const tapGamesTrack = {
             activityId: 'tap_getting_started',
             track: 'tap',
             activityDescriptionShort: `Welcome to Ambi! Let's play some tap games!`,
-            activityDescriptionLong: `Welcome to Ambi! Let's play some tap games! These will be on your device on this app.`
+            activityDescriptionLong: `Welcome to Ambi! Let's play some tap games! These will be on your device on this app.`,
+            activityDifficulty: 'easy',
         }
     ]
 }
@@ -48,7 +51,8 @@ export const sportsTrack = {
             activityId: 'sports_getting_started',
             track: 'sports',
             activityDescriptionShort: `This is the first sports exercise.`,
-            activityDescriptionLong: `This is the first sports exercise. You will be doing something to warm up.`
+            activityDescriptionLong: `This is the first sports exercise. You will be doing something to warm up.`,
+            activityDifficulty: 'easy',
         }
     ]
 }

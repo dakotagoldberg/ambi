@@ -18,7 +18,7 @@ function HomeScreen(props) {
         <View style={styles.container}>
             <View style={styles.topContainer}>
                 <Text style={styles.titleText}>Today</Text>
-                <Text style={styles.wordCountText}>X activities, {props.habits.length} habits</Text>
+                <Text style={styles.wordCountText}>X activities, {props.habits.filter(habit => habit.currentHabit).length} habits</Text>
                 <View style={styles.achievementsPanel}>
                     <View style={styles.achievementsPanelLeft}>
                         <LinearGradient
