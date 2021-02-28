@@ -95,7 +95,7 @@ function ProgressScreen(props) {
                 <Text style={styles.descriptionText}>
                         See your progress over time!
                 </Text>
-                <TouchableOpacity onPress={() => props.toggleTrackSubscription(track.id)}>
+                {/* <TouchableOpacity onPress={() => props.toggleTrackSubscription(track.id)}>
                     <LinearGradient
                             colors={['#FDBC0C', '#FD800C']}
                             start={[0,0]}
@@ -106,7 +106,7 @@ function ProgressScreen(props) {
                                 <Text style={styles.subscribeButtonText}>+ Journal Entry</Text>
                             </TouchableOpacity>
                     </LinearGradient>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
             </View>
             {/* <FlatList
                 style={{marginTop: 50,}}
@@ -120,9 +120,11 @@ function ProgressScreen(props) {
                 )}
             /> */}
             <FlatList
-                style={{marginTop: 100,}}
+                style={{marginTop: 25}}
                 data={constructProgress(props.habits, props.myActivities)}
                 keyExtractor={(item) => item.key}
+                showsVerticalScrollIndicator={false}
+                ListFooterComponent={() => <View style={{height: 30,}}></View>}
                 renderItem={({item}) => {
                     if (item.type == 'habit') {
                         return (
