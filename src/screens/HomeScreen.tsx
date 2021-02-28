@@ -53,7 +53,9 @@ function HomeScreen(props) {
             <FlatList
                 style={{marginTop: 40}}
                 data={props.habits.filter(habit => habit.currentHabit).concat(curateNextActivities(props.trackSubscriptions, props.myActivities))}
-                // keyExtractor={(item) => item.id}
+                keyExtractor={(item) => item.id || item.activityId}
+                showsVerticalScrollIndicator={false}
+                ListFooterComponent={() => <View style={{height: 50,}}/>}
                 renderItem={({item}) => {
                     if (item.currentHabit != undefined)
                         return <Habit key={item.id} habit={item}/>
@@ -64,7 +66,6 @@ function HomeScreen(props) {
             <View>
             
             </View>
-            
         </View>
     )
 }
@@ -74,6 +75,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFEFCE',
         alignItems: 'center',
+        
         // justifyContent: 'center'
     },
     topContainer: {

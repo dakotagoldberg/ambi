@@ -10,6 +10,8 @@ export const SET_HABIT_COMPLETED_FALSE = 'SET_HABIT_COMPLETED_FALSE'
 
 export const TOGGLE_TRACK_SUBSCRIPTION = 'TOGGLE_TRACK_SUBSCRIPTION'
 export const TOGGLE_ACTIVITY_COMPLETED = 'TOGGLE_ACTIVITY_COMPLETED'
+export const SET_ACTIVITY_IMAGE = 'SET_ACTIVITY_IMAGE'
+
 
 // Action Creators
 
@@ -38,4 +40,8 @@ export function toggleTrackSubscription(track: string) {
 
 export function toggleActivityCompleted(track: string) {
     return { type: TOGGLE_ACTIVITY_COMPLETED, track, date: new Date().toISOString() }
+}
+
+export function setActivityImage(activity: string, image) {
+    return { type: SET_ACTIVITY_IMAGE, activity, image, date: new Date().toISOString() }
 }

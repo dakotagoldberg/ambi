@@ -5,6 +5,7 @@ import HomeScreen from '../navigation/HabitStack';
 import TracksScreen from '../navigation/TracksStack';
 import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,9 +15,7 @@ const Tab = createBottomTabNavigator();
 //     )
 // }
 
-function Settings() {
-  return (<Text>hi</Text>)
-}
+
 
 export default function TabNavigator() {
   return (
@@ -40,7 +39,7 @@ export default function TabNavigator() {
     >
       <Tab.Screen 
         name="Settings" 
-        component={Settings} 
+        component={SettingsScreen} 
         options={{
           tabBarIcon: ({ color }) => {
             if (color == 'red') {
