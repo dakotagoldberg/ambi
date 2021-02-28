@@ -31,8 +31,18 @@ function ActivityScreen(props) {
             </View>  
             <Text style={styles.activityTitle}>{activity.activityName}</Text>
             <TouchableOpacity onPress={() => props.toggleActivityCompleted(activity.activityId)}>
-                <Text>{checkActivityCompleted(props.myActivities, activity.activityId) ? 'Completed' : 'Mark Complete'}</Text>
+                <Text style={styles. markCompletionButtonText}>{checkActivityCompleted(props.myActivities, activity.activityId) ? 'Completed' : 'Mark Complete'}</Text>
+                <LinearGradient
+                        colors={['#FDBC0C', '#FD800C']}
+                        start={[0,0]}
+                        end={[0,1]}
+                        style={styles.markCompleteButton}
+                        >
+                            <Text style={styles.markCompletionButtonText}>Mark Complete</Text>
+                    </LinearGradient>
             </TouchableOpacity>
+            <Text style={styles.description}>Description</Text>
+            <Text style={styles.actualDes}>Welcome to Ambi! Let's start with some simple handwriting practice. Grab any piece of paper, and write your name once with your right hand and then again with your left. Don't worry if either look messy — you're on your way to improving your handwriting and strength. Once you're done, take a picture of each name and submit them in the appropriate places below. Don't worry, we'll never save any images you upload — this is so we can score the readability of your writing and track your progress!</Text>
         </View>
     )
 }
@@ -49,6 +59,73 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: width,
+    },
+    Button: {
+        position: 'absolute',
+        marginTop: 15,
+        alignSelf: 'center',
+        width: 200,
+        height: 55,
+        borderRadius: 30,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    markCompleteButton: {
+        position: 'absolute',
+        width: 150,
+        height: 31,
+        alignSelf: 'center',
+        borderRadius: 15,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        marginBottom: 20,
+        alignItems: 'center',
+        top: 10,
+        justifyContent: 'center',
+    },
+    markCompletionButtonText: {
+        position: 'absolute',
+        fontFamily: 'DM Sans',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: 16,
+        lineHeight: 21,
+        textAlign: 'center',
+        color: '#fff',
+    },
+    description: {
+        position: 'absolute',
+        width: 136,
+        height: 31,
+        left: 40,
+        top: 200,
+        fontFamily: 'DM Sans',
+        fontStyle: 'normal',
+        fontWeight: 'bold',
+        fontSize: 24,
+        lineHeight: 31,
+        textAlign: 'center',
+        color: '#635C4E'
+    },
+    actualDes: {
+        position: 'absolute',
+        width: 287,
+        height: 397,
+        left: 40,
+        top: 241,
+        fontFamily: 'DM Sans',
+        fontStyle: 'normal',
+        fontWeight: 'normal',
+        fontSize: 18,
+        lineHeight: 23,
+        color: '#948B79'
     },
     backButton: {
         position: 'absolute',
