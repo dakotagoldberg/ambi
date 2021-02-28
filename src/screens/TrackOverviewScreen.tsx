@@ -1,31 +1,66 @@
 import React, {useState, useEffect} from 'react'
-import { Dimensions, View, Text, StyleSheet, TouchableOpacity, SectionList } from 'react-native'
+import { Dimensions, View, Text, StyleSheet, TouchableOpacity, SectionList, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons'; 
-import MaskedView from '@react-native-community/masked-view';
-import { LinearGradient } from 'expo-linear-gradient';
-import HabitCompact from '../components/HabitCompact';
 import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font';
-import habits from '../reducers/habits';
+import { tracks } from '../constants/tracks'
+import { LinearGradient } from 'expo-linear-gradient';
+import Activity from '../components/Activity';
 const {height, width} = Dimensions.get('window');
+
 
 function TrackOverviewScreen(props) {
 
     const [loaded] = useFonts(fonts);
     if (!loaded) { return null; }
     
+    const track = tracks.filter(track => track.id == props.route.params.name)[0]
+    // const trackName = tracks.map(track => track.id == props.route.params.name && track.name)
+    // const trackDescription = tracks.map(track => track.id == props.route.params.name && track.descriptionShort)
+    // const activityList = tracks.map(track => track.id == props.route.params.name && track.activities)
+
     return (
         <View style={styles.container}>
-            <View style={styles.headerRow}>
-                <TouchableOpacity 
-                    style={styles.backButton}
-                    onPress={() => props.navigation.goBack()}
-                >
-                    <MaterialIcons name="arrow-back-ios" size={30} color="#3A3833" />
+            <View style={styles.topPanel}>
+                <View style={styles.headerRow}>
+                    <TouchableOpacity 
+                        style={styles.backButton}
+                        onPress={() => props.navigation.goBack()}
+                    >
+                        <MaterialIcons name="arrow-back-ios" size={30} color="#3A3833" />
+                    </TouchableOpacity>
+                    <Text style={styles.titleText}>
+                        {track.name}
+                    </Text>
+                </View>
+                <Text style={styles.descriptionText}>
+                        {track.descriptionShort}
+                </Text>
+                <TouchableOpacity onPress={() => props.navigation.navigate('subscribe')}>
+                <LinearGradient
+                        colors={track.colors}
+                        start={[0,0]}
+                        end={[0,1]}
+                        style={styles.subscribeButton}
+                        >
+                            <TouchableOpacity onPress={() => props.navigation.navigate('subscribe')}>
+                            <Text style={styles.subscribeButtonText}>Subscribe</Text>
+                            </TouchableOpacity>
+                    </LinearGradient>
                 </TouchableOpacity>
-                <Text style={styles.titleText}>{props.route.params.name}</Text>
-            </View>   
+            </View>
+            <FlatList
+                style={{marginTop: 50,}}
+                data={track.activities}
+                keyExtractor={(item: any) => item.activityId}
+                renderItem={({item}) => (
+                    <Activity colors={track.colors} activity={item}/>
+                )}
+                ListFooterComponent={() => (
+                    <View style={styles.listItemContainer}><Text style={styles.listEndText}>More Coming Soon!</Text></View>
+                )}
+            />
         </View>
     )
 }
@@ -35,6 +70,17 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFEFCE',
         alignItems: 'center',
+    },
+    topPanel: {
+        // height: 200,
+        width: width,
+        borderRadius: 30,
+        // paddingTop: 30,
+        paddingHorizontal: 30,
+        paddingBottom: 40,
+        backgroundColor: '#FFFCF5',
+        alignItems: 'center',
+        // justifyContent: 'center',
     },
     headerRow: {
         flexDirection: 'row',
@@ -53,13 +99,55 @@ const styles = StyleSheet.create({
         color: '#3A3833',
         fontFamily: 'DMSans_Bold'
     },
-    sectionHeader: {
-        fontSize: 24,
+    descriptionText: {
+        marginTop: 2,
+        fontSize: 18,
         color: '#635C4E',
-        fontFamily: 'DMSans_Medium',
-        marginTop: 25,
-        marginLeft: width * .04,
-        marginBottom: 3,
+        fontFamily: 'DMSans_Regular'
+    },
+
+    subscribeButton: {
+        position: 'absolute',
+        marginTop: 15,
+        alignSelf: 'center',
+        width: 200,
+        height: 55,
+        borderRadius: 30,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.2,
+        shadowRadius: 10,
+        marginBottom: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    subscribeButtonText: {
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold',
+        fontFamily: 'DMSans_Bold'
+    },
+    listItemContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: width * .85,
+        // height: 75,
+        borderRadius: 15,
+        marginHorizontal: width * .025,
+        // marginVertical: width * .05,
+        backgroundColor: '#FFFCF5',
+        paddingHorizontal: 30,
+        paddingTop: 20,
+        paddingBottom: 18,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.05,
+        shadowRadius: 10,
+    },
+    listEndText: {
+        fontSize: 20,
+        color: '#635C4E',
+        fontFamily: 'DMSans_Bold',
     },
 })
 const mapStateToProps = state => {

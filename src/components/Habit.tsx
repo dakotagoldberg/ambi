@@ -102,6 +102,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 25,
         paddingTop: 20,
         paddingBottom: 18,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.05,
+        shadowRadius: 10,
     },
     leftGroup: {
         flexDirection: 'row',
