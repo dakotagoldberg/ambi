@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import HomeScreen from '../screens/HomeScreen'
 import EditHabitsScreen from '../screens/EditHabitsScreen'
 import Habit from '../components/Habit';
+import ActivityScreen from '../screens/ActivityScreen';
 
 
 const Stack = createStackNavigator();
@@ -16,6 +17,8 @@ function HabitStack() {
         >
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="EditHabits" component={EditHabitsScreen} />
+            <Stack.Screen name="Activity" component={ActivityScreen} />
+
 
         </Stack.Navigator>
     )

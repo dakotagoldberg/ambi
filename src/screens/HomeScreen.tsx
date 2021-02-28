@@ -5,20 +5,24 @@ import { FontAwesome5, MaterialIcons, MaterialCommunityIcons } from '@expo/vecto
 import MaskedView from '@react-native-community/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import Habit from '../components/Habit';
+import ActivityPreview from '../components/ActivityPreview';
 import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font';
+import { curateNextActivities } from '../constants/functions';
 const {height, width} = Dimensions.get('window');
 
 function HomeScreen(props) {
 
     const [loaded] = useFonts(fonts);
     if (!loaded) { return null; }
+
+    // console.log(curateNextActivities(props.trackSubscriptions, props.myActivities))
     
     return (
         <View style={styles.container}>
             <View style={styles.topContainer}>
                 <Text style={styles.titleText}>Today</Text>
-                <Text style={styles.wordCountText}>X activities, {props.habits.filter(habit => habit.currentHabit).length} habits</Text>
+                <Text style={styles.wordCountText}>{curateNextActivities(props.trackSubscriptions, props.myActivities).length} activities, {props.habits.filter(habit => habit.currentHabit).length} habits</Text>
                 <View style={styles.achievementsPanel}>
                     <View style={styles.achievementsPanelLeft}>
                         <LinearGradient
@@ -47,12 +51,15 @@ function HomeScreen(props) {
                 </TouchableOpacity>
             </View>
             <FlatList
-                style={{marginTop: 40,}}
-                data={props.habits.filter(habit => habit.currentHabit)}
-                keyExtractor={(item) => item.id}
-                renderItem={({item}) => (
-                    <Habit habit={item}/>
-                )}
+                style={{marginTop: 40}}
+                data={props.habits.filter(habit => habit.currentHabit).concat(curateNextActivities(props.trackSubscriptions, props.myActivities))}
+                // keyExtractor={(item) => item.id}
+                renderItem={({item}) => {
+                    if (item.currentHabit != undefined)
+                        return <Habit key={item.id} habit={item}/>
+                    else
+                        return <ActivityPreview navigation={props.navigation} key={item.activityId} activity={item}/>
+                }}
             />
             <View>
             
@@ -67,7 +74,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFEFCE',
         alignItems: 'center',
-        // paddingBottom: 150,
         // justifyContent: 'center'
     },
     topContainer: {
@@ -150,6 +156,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = state => {
     return {
         habits: state.habits.allHabits,
+        trackSubscriptions: state.tracks.trackSubscriptions,
+        myActivities: state.tracks.myActivities,
     }
 }
 export default connect(

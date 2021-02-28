@@ -1,5 +1,7 @@
 import moment from "moment"
+import { tracks } from '../constants/tracks'
 
+// Check if a habit has been completed today
 export const checkHabitCompleted = (habit) => {
     let completed = false
     habit.datesCompleted.forEach(day => {
@@ -9,6 +11,7 @@ export const checkHabitCompleted = (habit) => {
     return completed
 }
 
+// Calculate the current streak
 export const calculateStreak = (habit) => {
     if (habit.datesCompleted.length < 1)
         return 0
@@ -52,9 +55,26 @@ export const calculateStreak = (habit) => {
     return streak
 }
 
+// Check if an activity has been completed
 export const checkActivityCompleted = (activityList, activityName) => {
     if (activityList.filter(activity => activity.id == activityName).length > 0)
         return activityList.filter(activity => activity.id == activityName)[0].dateCompleted != ''
     else
         return false
+}
+
+// Determine which activities should show up on the homepage
+export const curateNextActivities = (trackSubscriptions, myActivities) => {
+    let nextActivities = []
+    trackSubscriptions.forEach(track => {
+        let currentTrack = tracks.filter(t => t.id == track)[0]
+        for (let i = 0; i < currentTrack.activities.length; i++) {
+            if (checkActivityCompleted(myActivities, currentTrack.activities[i].activityId) == false) {
+                let activityToAdd = currentTrack.activities.filter(a => a.activityId == currentTrack.activities[i].activityId)[0]
+                nextActivities.push(activityToAdd)
+                break
+            }
+        }
+    })
+    return nextActivities
 }
