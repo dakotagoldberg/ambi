@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen'
 import EditHabitsScreen from '../screens/EditHabitsScreen'
 import Habit from '../components/Habit';
 import ActivityScreen from '../screens/ActivityScreen';
+import ProgressScreen from '../screens/ProgressScreen';
 
 
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ function HabitStack() {
         >
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="EditHabits" component={EditHabitsScreen} />
+            <Stack.Screen name="Progress" component={ProgressScreen} />
             <Stack.Screen name="Activity" component={ActivityScreen} />
 
 

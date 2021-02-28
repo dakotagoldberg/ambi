@@ -23,7 +23,7 @@ function HomeScreen(props) {
             <View style={styles.topContainer}>
                 <Text style={styles.titleText}>Today</Text>
                 <Text style={styles.wordCountText}>{curateNextActivities(props.trackSubscriptions, props.myActivities).length} activities, {props.habits.filter(habit => habit.currentHabit).length} habits</Text>
-                <View style={styles.achievementsPanel}>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Progress')} style={styles.achievementsPanel}>
                     <View style={styles.achievementsPanelLeft}>
                         <LinearGradient
                             colors={['#FDBC0C', '#FD800C']}
@@ -36,7 +36,7 @@ function HomeScreen(props) {
                         <Text style={styles.achievementsPanelText}>My Progress</Text>
                     </View>
                         <MaterialIcons name="arrow-forward-ios" size={26} color="#635C4E" />
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity onPress={() => props.navigation.navigate('EditHabits')}>
                 <LinearGradient
                         colors={['#FDBC0C', '#FD800C']}

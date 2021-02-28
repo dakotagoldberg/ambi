@@ -1,52 +1,53 @@
 import MaskedView from '@react-native-community/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions, Image } from 'react-native'
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { FontAwesome5, Octicons } from '@expo/vector-icons'; 
 import { connect } from 'react-redux'
-import { toggleHabbitCompleted } from '../actions'
+import { toggleAddHabit } from '../actions'
 import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
-import moment from 'moment';
-import { tracks } from '../constants/tracks';
 const {height, width} = Dimensions.get('window');
 
-function ActivityPreview(props) {
-    const activity = props.activity
+function HabitProgress(props) {
+    const item = props.habit
 
     const [loaded] = useFonts(fonts);
     if (!loaded) { return null; }
 
-    
-
     return(
         <View style={styles.listItemContainer}>
             <View style={styles.leftGroup}>
-                <Image style={styles.icon} source={tracks.filter(t => t.id == activity.trackId)[0].icon}/>
-                {/* <LinearGradient
+                <LinearGradient
                 colors={item.colors}
                 start={[0,0]}
                 end={[0,1]}
                 style={styles.habitIconContainer}
                 >
                     <FontAwesome5 name={item.icon.slug} size={24} color="white" />
-                </LinearGradient> */}
+                </LinearGradient>
                 <View style={styles.habitTextContainer}>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitName}>{activity.activityName}</Text>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitDescription}>{activity.activityDescriptionUltraShort}</Text>
-                    <View style={styles.habitInfoContainer}>
-                        <View style={styles.habitLabelContainer}>
-                            <Text style={styles.habitLabelContainerText}>{activity.trackName}</Text>
-                        </View>
-                        
-                    </View>
+                    <Text style={styles.habitName}>{item.name}</Text>
                 </View>
             </View>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Activity', {activity: activity, colors: tracks.filter(t => t.id == activity.trackId)[0].colors})}>
-                <MaterialIcons name="arrow-forward-ios" size={26} color="#C7BFB0" />
-            </TouchableOpacity>
+            <View 
+                style={[styles.habitCheckboxContainer, styles.habitCheckboxChecked]}
+                >
+                    <LinearGradient
+                        colors={item.colors}
+                        start={[0,0]}
+                        end={[0,1]}
+                        style={styles.habitCheckboxCheckedFill}
+                    >
+                        <Octicons 
+                            name='check' 
+                            size={18}
+                            color="white" 
+                        />
+                    </LinearGradient>
+            </View>
         </View>
     )
 }
@@ -57,11 +58,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: width * .85,
-        height: 110,
+        height: 75,
         borderRadius: 15,
         margin: width * .025,
         backgroundColor: '#FFFCF5',
-        paddingHorizontal: 25,
+        paddingHorizontal: 15,
         paddingTop: 20,
         paddingBottom: 18,
         shadowOffset: {width: 0, height: 5},
@@ -73,16 +74,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    icon: {
-        height: 48,
-        width: 48,
-        margin: -4,
-    },
     habitIconContainer: {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 10,
-        
+        height: 44,
+        width: 44,
         shadowOffset: {width: 0, height: 5},
         shadowColor: "#8E3D02",
         shadowOpacity: 0.2,
@@ -91,14 +88,12 @@ const styles = StyleSheet.create({
     habitName: {
         fontSize: 18,
         color: '#635C4E',
-        fontFamily: 'DMSans_Medium',
-        width: width * .5,
+        fontFamily: 'DMSans_Medium'
     },
     habitDescription: {
         fontSize: 14,
         color: '#635C4E',
         fontFamily: 'DMSans_Regular',
-        width: width * .5,
     },
     habitTextContainer: {
         marginLeft: 18,
@@ -121,6 +116,39 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 2,
     },
+    habitStreakContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginLeft: 10,
+    },
+    habitStreakText: {
+        fontSize: 14,
+        color: '#C7BFB0',
+        fontFamily: 'DMSans_Medium'
+    },
+    habitStreakIcon: {
+        flex: 1, 
+        flexDirection: 'row', 
+        marginLeft: -1,
+        // height: 15,
+    },
+    habitCheckboxContainer: {
+        height: 32,
+        width: 32,
+        borderRadius: 10,
+    },
+    habitCheckboxChecked: {
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+    },
+    habitCheckboxCheckedFill: {
+        flex:1, 
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 10,
+    }
     
 })
 
@@ -132,5 +160,5 @@ const mapStateToProps = state => {
 
 export default connect(
     mapStateToProps,
-    {  }
-)(ActivityPreview)
+    { toggleAddHabit }
+)(HabitProgress)

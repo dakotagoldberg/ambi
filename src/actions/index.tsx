@@ -38,8 +38,8 @@ export function toggleTrackSubscription(track: string) {
     return { type: TOGGLE_TRACK_SUBSCRIPTION, track }
 }
 
-export function toggleActivityCompleted(track: string) {
-    return { type: TOGGLE_ACTIVITY_COMPLETED, track, date: new Date().toISOString() }
+export function toggleActivityCompleted(activity: string) {
+    return { type: TOGGLE_ACTIVITY_COMPLETED, activity, date: new Date().toISOString() }
 }
 
 export function setActivityImage(activity: string, image) {
