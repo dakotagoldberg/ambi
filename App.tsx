@@ -10,7 +10,6 @@ import moment from 'moment';
 
 export default function App() {
 
-  // console.log(moment(new Date().toISOString()).subtract(1, 'd').format('MM_DD_YYYY'))
   
   return (
     <Provider store={store}>

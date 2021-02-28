@@ -6,6 +6,8 @@ import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font';
 import { tracks } from '../constants/tracks'
 import { LinearGradient } from 'expo-linear-gradient';
+import { toggleActivityCompleted } from '../actions'
+import { checkActivityCompleted } from '../constants/functions';
 const {height, width} = Dimensions.get('window');
 
 
@@ -28,6 +30,9 @@ function ActivityScreen(props) {
                 {/* <Text style={styles.titleText}>Edit Habits</Text> */}
             </View>  
             <Text style={styles.activityTitle}>{activity.activityName}</Text>
+            <TouchableOpacity onPress={() => props.toggleActivityCompleted(activity.activityId)}>
+                <Text>{checkActivityCompleted(props.myActivities, activity.activityId) ? 'Completed' : 'Mark Complete'}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -62,10 +67,10 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state => {
     return {
-        
+        myActivities: state.tracks.myActivities,
     }
 }
 export default connect(
     mapStateToProps,
-    {}
+    { toggleActivityCompleted }
 )(ActivityScreen)

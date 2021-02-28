@@ -8,9 +8,12 @@ export const TOGGLE_HABIT_COMPLETED = 'TOGGLE_HABIT_COMPLETED'
 export const SET_HABIT_COMPLETED_TRUE = 'SET_HABIT_COMPLETED_TRUE'
 export const SET_HABIT_COMPLETED_FALSE = 'SET_HABIT_COMPLETED_FALSE'
 
+export const TOGGLE_TRACK_SUBSCRIPTION = 'TOGGLE_TRACK_SUBSCRIPTION'
+export const TOGGLE_ACTIVITY_COMPLETED = 'TOGGLE_ACTIVITY_COMPLETED'
 
 // Action Creators
 
+// Habits
 export function addHabit(habit: string) {
     return { type: ADD_HABIT, habit }
 }
@@ -25,4 +28,10 @@ export function removeHabit(habit: string) {
 
 export function toggleHabbitCompleted(habit: string) {
     return { type: TOGGLE_HABIT_COMPLETED, habit }
+}
+
+
+// Tracks
+export function toggleActivityCompleted(track: string) {
+    return { type: TOGGLE_ACTIVITY_COMPLETED, track, date: new Date().toISOString() }
 }

@@ -51,3 +51,10 @@ export const calculateStreak = (habit) => {
     
     return streak
 }
+
+export const checkActivityCompleted = (activityList, activityName) => {
+    if (activityList.filter(activity => activity.id == activityName).length > 0)
+        return activityList.filter(activity => activity.id == activityName)[0].dateCompleted != ''
+    else
+        return false
+}

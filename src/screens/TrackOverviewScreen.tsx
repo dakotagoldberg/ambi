@@ -7,6 +7,7 @@ import { fonts } from '../constants/font';
 import { tracks } from '../constants/tracks'
 import { LinearGradient } from 'expo-linear-gradient';
 import Activity from '../components/Activity';
+import { toggleTrackSubscription } from '../actions'
 const {height, width} = Dimensions.get('window');
 
 
@@ -16,9 +17,8 @@ function TrackOverviewScreen(props) {
     if (!loaded) { return null; }
     
     const track = tracks.filter(track => track.id == props.route.params.name)[0]
-    // const trackName = tracks.map(track => track.id == props.route.params.name && track.name)
-    // const trackDescription = tracks.map(track => track.id == props.route.params.name && track.descriptionShort)
-    // const activityList = tracks.map(track => track.id == props.route.params.name && track.activities)
+
+    // console.log(props.trackSubscriptions)
 
     return (
         <View style={styles.container}>
@@ -37,15 +37,15 @@ function TrackOverviewScreen(props) {
                 <Text style={styles.descriptionText}>
                         {track.descriptionShort}
                 </Text>
-                <TouchableOpacity onPress={() => props.navigation.navigate('subscribe')}>
-                <LinearGradient
-                        colors={track.colors}
-                        start={[0,0]}
-                        end={[0,1]}
-                        style={styles.subscribeButton}
-                        >
-                            <TouchableOpacity onPress={() => props.navigation.navigate('subscribe')}>
-                            <Text style={styles.subscribeButtonText}>Subscribe</Text>
+                <TouchableOpacity onPress={() => props.toggleTrackSubscription(track.id)}>
+                    <LinearGradient
+                            colors={props.trackSubscriptions.includes(track.id) ? [track.colors[0] + '50', track.colors[1] + '50'] : track.colors}
+                            start={[0,0]}
+                            end={[0,1]}
+                            style={styles.subscribeButton}
+                            >
+                            <TouchableOpacity onPress={() => props.toggleTrackSubscription(track.id)}>
+                            <Text style={styles.subscribeButtonText}>{props.trackSubscriptions.includes(track.id) ? 'Subscribed' : 'Subscribe'}</Text>
                             </TouchableOpacity>
                     </LinearGradient>
                 </TouchableOpacity>
@@ -153,10 +153,10 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state => {
     return {
-        
+        trackSubscriptions: state.tracks.trackSubscriptions 
     }
 }
 export default connect(
     mapStateToProps,
-    {}
+    { toggleTrackSubscription }
 )(TrackOverviewScreen)

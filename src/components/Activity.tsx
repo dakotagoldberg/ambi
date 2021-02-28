@@ -9,6 +9,7 @@ import { useFonts } from 'expo-font';
 import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
+import { checkActivityCompleted } from '../constants/functions';
 const {height, width} = Dimensions.get('window');
 
 function HabitCompact(props) {
@@ -23,15 +24,15 @@ function HabitCompact(props) {
                 <View style={styles.topContainer}>
                     <Text numberOfLines={3} ellipsizeMode='tail' style={styles.titleText}>{props.activity.activityName}</Text>
                     <LinearGradient
-                            colors={props.colors}
+                            colors={checkActivityCompleted(props.myActivities, props.activity.activityId) ? props.colors : ['transparent', 'transparent']}
                             start={[0,0]}
                             end={[0,1]}
-                            style={styles.checkContainer}
+                            style={checkActivityCompleted(props.myActivities, props.activity.activityId) ? styles.checkContainer : styles.checkContainerUnchecked}
                         >
                             <Octicons 
                                 name="check" 
                                 size={16}
-                                color="white" 
+                                color={checkActivityCompleted(props.myActivities, props.activity.activityId) ? "white" : '#C7BFB0'} 
                             />
                         </LinearGradient>
                     </View>
@@ -95,6 +96,15 @@ const styles = StyleSheet.create({
         height: 25,
         width: 25,
         borderRadius: 13,
+    },
+    checkContainerUnchecked: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 25,
+        width: 25,
+        borderRadius: 13,
+        borderColor: '#C7BFB0',
+        borderWidth: 2,
     },
     descriptionText: {
         marginTop: 12,
@@ -161,7 +171,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        
+        myActivities: state.tracks.myActivities,
     }
 }
 
