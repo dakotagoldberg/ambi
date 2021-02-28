@@ -10,10 +10,11 @@ import { fonts } from '../constants/font'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as Haptics from 'expo-haptics';
 import moment from 'moment';
+import { checkHabitCompleted, calculateStreak } from '../constants/functions';
 import { tracks } from '../constants/tracks';
 const {height, width} = Dimensions.get('window');
 
-function ActivityPreview(props) {
+function ActivityProgress(props) {
     const activity = props.activity
 
     const [loaded] = useFonts(fonts);
@@ -22,42 +23,45 @@ function ActivityPreview(props) {
     
 
     return(
-        <View style={styles.listItemContainer}>
-            <View style={styles.leftGroup}>
-                <Image style={styles.icon} source={tracks.filter(t => t.id == activity.trackId)[0].icon}/>
-                {/* <LinearGradient
-                colors={item.colors}
-                start={[0,0]}
-                end={[0,1]}
-                style={styles.habitIconContainer}
-                >
-                    <FontAwesome5 name={item.icon.slug} size={24} color="white" />
-                </LinearGradient> */}
-                <View style={styles.habitTextContainer}>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitName}>{activity.activityName}</Text>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitDescription}>{activity.activityDescriptionUltraShort}</Text>
-                    <View style={styles.habitInfoContainer}>
-                        <View style={styles.habitLabelContainer}>
-                            <Text style={styles.habitLabelContainerText}>{activity.trackName}</Text>
+        <View style={styles.container}>
+            <View style={styles.listItemContainer}>
+                <View style={styles.leftGroup}>
+                    <Image style={styles.icon} source={activity.icon}/>
+                    {/* <LinearGradient
+                    colors={item.colors}
+                    start={[0,0]}
+                    end={[0,1]}
+                    style={styles.habitIconContainer}
+                    >
+                        <FontAwesome5 name={item.icon.slug} size={24} color="white" />
+                    </LinearGradient> */}
+                    <View style={styles.habitTextContainer}>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.habitName}>{activity.name}</Text>
+                        <View style={styles.habitInfoContainer}>
+                            
                         </View>
-                        
                     </View>
                 </View>
+                <TouchableOpacity onPress={() => props.navigation.navigate('Activity', {activity: activity.activity, colors: tracks.filter(t => t.id == activity.activity.trackId)[0].colors})}>
+                    <MaterialIcons name="arrow-forward-ios" size={26} color="#C7BFB0" />
+                </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => props.navigation.navigate('Activity', {activity: activity, colors: tracks.filter(t => t.id == activity.trackId)[0].colors})}>
-                <MaterialIcons name="arrow-forward-ios" size={26} color="#C7BFB0" />
-            </TouchableOpacity>
+            <View style={{
+                shadowOffset: {width: 0, height: 5},
+                shadowColor: "#8E3D02",
+                shadowOpacity: 0.2,
+                shadowRadius: 10,
+            }}>
+            {activity.image && <Image source={{ uri: activity.image}} style={styles.image} />}
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    listItemContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+    container: {
         width: width * .85,
-        height: 110,
+        // height: 110,
         borderRadius: 15,
         margin: width * .025,
         backgroundColor: '#FFFCF5',
@@ -68,6 +72,11 @@ const styles = StyleSheet.create({
         shadowColor: "#8E3D02",
         shadowOpacity: 0.05,
         shadowRadius: 10,
+    },
+    listItemContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     leftGroup: {
         flexDirection: 'row',
@@ -121,7 +130,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 2,
     },
-    
+    image: {
+        marginTop: 10,
+        height: 175,
+        width: width * .71,
+        borderRadius: 10,
+        shadowOffset: {width: 0, height: 5},
+        shadowColor: "#8E3D02",
+        shadowOpacity: 0.05,
+        shadowRadius: 10,
+        alignSelf: 'center',
+    },
 })
 
 const mapStateToProps = state => {
@@ -133,4 +152,4 @@ const mapStateToProps = state => {
 export default connect(
     mapStateToProps,
     {  }
-)(ActivityPreview)
+)(ActivityProgress)

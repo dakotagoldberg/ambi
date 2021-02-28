@@ -21,17 +21,17 @@ export default function tracks(state = initialState, action) {
                 return {...state, trackSubscriptions: [...state.trackSubscriptions, action.track]}
             }
         case TOGGLE_ACTIVITY_COMPLETED:
-            if (state.myActivities.filter(activity => activity.id == action.track).length == 0) {
+            if (state.myActivities.filter(activity => activity.id == action.activity).length == 0) {
                 return {...state, myActivities: [...state.myActivities, {
-                    id: action.track,
+                    id: action.activity,
                     dateCompleted: action.date,
                 }]}
             }
-            else if (state.myActivities.filter(activity => activity.id == action.track)[0].dateCompleted == '') {
-                return {...state, myActivities: state.myActivities.map(activity => activity.id === action.track ? {...activity, dateCompleted: action.date} : activity)}
+            else if (state.myActivities.filter(activity => activity.id == action.activity)[0].dateCompleted == '') {
+                return {...state, myActivities: state.myActivities.map(activity => activity.id === action.activity ? {...activity, dateCompleted: action.date} : activity)}
             }
             else {
-                return {...state, myActivities: state.myActivities.map(activity => activity.id === action.track ? {...activity, dateCompleted: ''} : activity)}
+                return {...state, myActivities: state.myActivities.map(activity => activity.id === action.activity ? {...activity, dateCompleted: ''} : activity)}
             }
         case SET_ACTIVITY_IMAGE:
             

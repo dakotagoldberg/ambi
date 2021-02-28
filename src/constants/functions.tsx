@@ -25,7 +25,8 @@ export const calculateStreak = (habit) => {
     if (checkHabitCompleted(habit)) {
         if (moment(habit.datesCompleted[1]).diff(moment(new Date().toISOString()), 'd') == -1) {
             for (let i = 0; i < habit.datesCompleted.length - 1; i++) {
-                if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') == 1) {
+                
+                if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') <= 1) {
                     streak += 1
                 }
                 else {
@@ -39,7 +40,7 @@ export const calculateStreak = (habit) => {
     else {
         if (moment(habit.datesCompleted[0]).diff(moment(new Date().toISOString()), 'd') == -1) {
             for (let i = 0; i < habit.datesCompleted.length - 1; i++) {
-                if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') == 1) {
+                if (moment(habit.datesCompleted[i]).diff(moment(habit.datesCompleted[i + 1]), 'd') <= 1) {
                     streak += 1
                 }
                 else {
@@ -77,4 +78,20 @@ export const curateNextActivities = (trackSubscriptions, myActivities) => {
         }
     })
     return nextActivities
+}
+
+var randHex = function(len: number) {
+    var maxlen = 8,
+        min = Math.pow(16,Math.min(len,maxlen)-1),
+        max = Math.pow(16,Math.min(len,maxlen)) - 1,
+        n   = Math.floor( Math.random() * (max-min+1) ) + min,
+        r   = n.toString(16);
+    while ( r.length < len ) {
+       r = r + randHex( len - maxlen );
+    }
+    return r;
+  };
+
+export const generateId = function() {
+    return randHex(10) + '-' + randHex(10) + '-' + randHex(10)
 }
