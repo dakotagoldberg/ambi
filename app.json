@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "ambi",
+    "name": "Ambi",
     "slug": "ambi",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,6 +27,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Ambi's goal is to help its users become ambidextrous! The app provides habit tracking for daily non-dominant hand activities, hand-strengthening tap games, and guided writing and sports exercises. ",
+    "githubUrl": "https://github.com/dakotagoldberg/ambi"
   }
 }
